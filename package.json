@@ -1,0 +1,46 @@
+{
+    "name": "typeorm-i18n",
+    "version": "0.0.1",
+    "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/vlzh/typeorm-i18n"
+    },
+    "bugs": {
+        "url": "https://github.com/vlzh/typeorm-i18n/issues"
+    },
+    "author": "vlzh",
+    "license": "MIT",
+    "scripts": {
+        "test": "jest",
+        "lint": "eslint .",
+        "environment:start-db": "docker run --rm -p 5433:5432 -d --name=typeormi18n_test_database -e POSTGRES_PASSWORD=test -e POSTGRES_USER=test -e POSTGRES_DB=test  postgres:11",
+        "environment:stop-db": "docker kill typeormi18n_test_database"
+    },
+    "dependencies": {
+        "typeorm": "^0.2.19"
+    },
+    "devDependencies": {
+        "@types/jest": "^24.0.18",
+        "@types/node": "^12.7.5",
+        "@typescript-eslint/eslint-plugin": "^2.3.0",
+        "@typescript-eslint/parser": "^2.3.0",
+        "eslint": "^6.4.0",
+        "eslint-config-prettier": "^6.3.0",
+        "eslint-plugin-prettier": "^3.1.1",
+        "husky": "^3.0.5",
+        "jest": "^24.9.0",
+        "pg": "^7.12.1",
+        "reflect-metadata": "^0.1.13",
+        "ts-jest": "^24.1.0",
+        "typescript": "^3.6.3"
+    },
+    "prettier": {
+        "tabWidth": 4
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn test && yarn lint"
+        }
+    }
+}
