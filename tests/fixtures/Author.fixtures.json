@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "fullName": "George Orwell",
+        "fullName__fr": "George Orwell(fr)",
+        "fullName__ru": "Джордж Оруэлл"
+    },
+    {
+        "id": 1,
+        "fullName": "Vladimir Nabokov",
+        "fullName__fr": "Vladimir Nabokov(fr)",
+        "fullName__ru": "Владимир Набоков"
+    },
+    {
+        "id": 1,
+        "fullName": "Alexander Pushkin",
+        "fullName__fr": "Alexander Pushkin(fr)",
+        "fullName__ru": "Александр Пушкин"
+    }
+]

@@ -18,7 +18,7 @@
         "baseUrl": "./src",
         "preserveSymlinks": false,
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
+        "emitDecoratorMetadata": true
     },
     "exclude": ["node_modules", "dist", "tests"]
 }

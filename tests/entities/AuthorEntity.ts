@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 import { I18nColumn } from "../../src";
 
 @Entity()
-export class Post {
+export class Author {
     @PrimaryGeneratedColumn()
     public id!: number;
     @I18nColumn({
@@ -10,5 +10,5 @@ export class Post {
         languages: ["en", "fr", "ru"]
     })
     @Column()
-    public title?: string;
+    public full_name!: string;
 }
