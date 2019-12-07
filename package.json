@@ -1,7 +1,8 @@
 {
     "name": "typeorm-i18n",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "repository": {
         "type": "git",
         "url": "http://github.com/vlzh/typeorm-i18n"
@@ -13,13 +14,14 @@
     "license": "MIT",
     "scripts": {
         "build": "tsc",
+        "start": "tsc --watch",
         "test": "jest",
         "lint": "eslint .",
         "environment:start-db": "docker run --rm -p 5433:5432 -d --name=typeormi18n_test_database -e POSTGRES_PASSWORD=test -e POSTGRES_USER=test -e POSTGRES_DB=test  postgres:11",
         "environment:stop-db": "docker kill typeormi18n_test_database"
     },
     "dependencies": {
-        "typeorm": "^0.2.19"
+        "typeorm": "^0.2.20"
     },
     "devDependencies": {
         "@types/jest": "^24.0.18",

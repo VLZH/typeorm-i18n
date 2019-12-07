@@ -20,6 +20,33 @@ npm install typeorm-i18n
 
 # Usage
 
+Declare entity:
+
+```typescript
+import { Entity, Column } from "typeorm";
+import { I18nColumn } from "typeorm-i18n";
+
+@Entity("articles")
+export class Article extends BaseSeoEntity {
+    @I18nColumn({
+        default_language: "ru",
+        languages: ["ru", "en", "kg"]
+    })
+    @Column()
+    title: string;
+    @I18nColumn({
+        default_language: "ru",
+        languages: ["ru", "en", "kg"]
+    })
+    @Column({
+        type: "text"
+    })
+    body: string;
+}
+```
+
+Get data:
+
 ```typescript
 import { createConnection, Connection } from "typeorm";
 import { getI18nConnection } from "typeorm-i18n";

@@ -27,7 +27,7 @@ describe("structure on connection and entity manager", () => {
         i18n_connection = getI18nConnection();
     });
 
-    afterEach(() => {
+    afterEach((): Promise<any> | void => {
         if (connection && connection.isConnected) return connection.close();
     });
 

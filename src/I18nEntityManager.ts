@@ -1,4 +1,4 @@
-import { I18nSelectQueryBuilder } from "index";
+import { I18nSelectQueryBuilder } from "./I18nQueryBuilder";
 import { EntityManager, EntitySchema, ObjectType } from "typeorm";
 import { I18nRepository } from "./I18nRepository";
 

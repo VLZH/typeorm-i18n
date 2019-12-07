@@ -14,7 +14,7 @@ import {
     getTestDbOptions
 } from "./utils";
 
-describe("test util function", () => {
+describe("test utils functions", () => {
     it("isTranslation", () => {
         expect(isTranslation("title__ru")).toBe(true);
         expect(isTranslation("title__rus")).toBe(false);
@@ -52,8 +52,10 @@ describe("createQueryBuilder returns I18nQueryBuilder", () => {
     });
 
     afterEach(() => {
-        if (i18n_connection && i18n_connection.isConnected)
+        if (i18n_connection && i18n_connection.isConnected) {
             return i18n_connection.close();
+        }
+        return undefined;
     });
 
     it("I18nConnection.createQueryBuilder returns I18nQueryBuilder", () => {

@@ -1,24 +1,23 @@
 {
     "compilerOptions": {
-        "incremental": true,
-        "target": "es5",
-        "module": "commonjs",
         "declaration": true,
-        "declarationMap": true,
-        "sourceMap": true,
-        "outDir": "./dist",
-
-        "strict": true,
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "alwaysStrict": true,
-
-        "moduleResolution": "node",
-        "baseUrl": "./src",
-        "preserveSymlinks": false,
+        "downlevelIteration": true,
+        "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "importHelpers": true,
+        "lib": ["es5", "es6"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "outDir": "./dist",
+        "sourceMap": true,
+        "strict": true,
+        // "strictNullChecks": true,
+        "stripInternal": true,
+        "target": "es5"
     },
     "exclude": ["node_modules", "dist", "tests"]
 }

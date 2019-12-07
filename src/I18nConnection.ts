@@ -1,4 +1,4 @@
-import { I18nRepository } from "index";
+import { I18nRepository } from "./I18nRepository";
 import { Connection, EntitySchema, ObjectType, QueryRunner } from "typeorm";
 import { I18nConnectionOptions } from "./connection-options";
 import { I18nEntityManager } from "./I18nEntityManager";

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/12.8.0/bin/node /usr/local/bin/yarn add typescrpt@next
+  /usr/local/Cellar/node/12.8.0/bin/node /usr/local/bin/yarn publish
 
 PATH: 
   /usr/local/opt/sqlite/bin:/Users/vladimirzhdanov/Library/Android/sdk/platform-tools:/Users/vladimirzhdanov/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/opt/sqlite/bin:/Users/vladimirzhdanov/Library/Android/sdk/platform-tools:/Users/vladimirzhdanov/.cargo/bin:/usr/local/go/bin:/Users/vladimirzhdanov/go/bin:/Users/vladimirzhdanov/.yarn/bin:/Users/vladimirzhdanov/Library/Python/3.6/bin:/Users/vladimirzhdanov/.fzf/bin:/usr/local/go/bin:/Users/vladimirzhdanov/go/bin:/Users/vladimirzhdanov/.yarn/bin:/Users/vladimirzhdanov/Library/Python/3.6/bin
@@ -14,58 +14,65 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/typescrpt: Not found
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66830:18)
-      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140464:22)
-      at Request.emit (events.js:203:13)
-      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141436:10)
-      at Request.emit (events.js:203:13)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141358:12)
-      at Object.onceWrapper (events.js:291:20)
-      at IncomingMessage.emit (events.js:208:15)
-      at endReadableNT (_stream_readable.js:1168:12)
-      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+  Error: canceled
+      at Interface.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:136724:13)
+      at Interface.emit (events.js:203:13)
+      at Interface._ttyWrite (readline.js:880:16)
+      at ReadStream.onkeypress (readline.js:191:10)
+      at ReadStream.emit (events.js:203:13)
+      at emitKeys (internal/readline/utils.js:414:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1146:36)
+      at ReadStream.emit (events.js:203:13)
+      at addChunk (_stream_readable.js:295:12)
 
 npm manifest: 
   {
-    "name": "typeorm-i18n",
-    "version": "0.0.1",
-    "main": "dist/index.js",
-    "repository": "http://github.com/vlzh/typeorm-i18n",
-    "author": "vlzh",
-    "license": "MIT",
-    "scripts": {
-      "test": "jest",
-      "lint": "eslint .",
-      "start-database": "docker run --rm -p 5433:5432 -d --name=typeormi18n_test_database -e POSTGRES_PASSWORD=test -e POSTGRES_USER=test -e POSTGRES_DB=test  postgres:11",
-      "stop-database": "docker kill typeormi18n_test_database"
-    },
-    "dependencies": {
-      "typeorm": "^0.2.19"
-    },
-    "devDependencies": {
-      "@types/jest": "^24.0.18",
-      "@types/node": "^12.7.5",
-      "@typescript-eslint/eslint-plugin": "^2.3.0",
-      "@typescript-eslint/parser": "^2.3.0",
-      "eslint": "^6.4.0",
-      "eslint-config-prettier": "^6.3.0",
-      "eslint-plugin-prettier": "^3.1.1",
-      "husky": "^3.0.5",
-      "jest": "^24.9.0",
-      "pg": "^7.12.1",
-      "reflect-metadata": "^0.1.13",
-      "ts-jest": "^24.1.0",
-      "typescript": "^3.6.3"
-    },
-    "prettier": {
-      "tabWidth": 4
-    },
-    "husky": {
-      "hooks": {
-        "pre-commit": "yarn test && yarn lint"
+      "name": "typeorm-i18n",
+      "version": "0.0.1",
+      "main": "dist/index.js",
+      "repository": {
+          "type": "git",
+          "url": "http://github.com/vlzh/typeorm-i18n"
+      },
+      "bugs": {
+          "url": "https://github.com/vlzh/typeorm-i18n/issues"
+      },
+      "author": "vlzh",
+      "license": "MIT",
+      "scripts": {
+          "build": "tsc",
+          "test": "jest",
+          "lint": "eslint .",
+          "environment:start-db": "docker run --rm -p 5433:5432 -d --name=typeormi18n_test_database -e POSTGRES_PASSWORD=test -e POSTGRES_USER=test -e POSTGRES_DB=test  postgres:11",
+          "environment:stop-db": "docker kill typeormi18n_test_database"
+      },
+      "dependencies": {
+          "typeorm": "^0.2.19"
+      },
+      "devDependencies": {
+          "@types/jest": "^24.0.18",
+          "@types/node": "^12.7.5",
+          "@typescript-eslint/eslint-plugin": "^2.3.0",
+          "@typescript-eslint/parser": "^2.3.0",
+          "eslint": "^6.4.0",
+          "eslint-config-prettier": "^6.3.0",
+          "eslint-plugin-prettier": "^3.1.1",
+          "husky": "^3.0.5",
+          "jest": "^24.9.0",
+          "pg": "^7.12.1",
+          "reflect-metadata": "^0.1.13",
+          "ts-jest": "^24.1.0",
+          "typescript": "^3.6.3"
+      },
+      "prettier": {
+          "tabWidth": 4
+      },
+      "husky": {
+          "hooks": {
+              "pre-commit": "yarn test && yarn lint"
+          }
       }
-    }
   }
 
 yarn manifest: 

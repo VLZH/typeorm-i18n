@@ -16,9 +16,10 @@ describe("test decorator I18nColumn", () => {
         connection.connect();
     });
 
-    afterEach(() => {
-        if (i18n_connection && i18n_connection.isConnected)
+    afterEach((): Promise<any> | void => {
+        if (i18n_connection && i18n_connection.isConnected) {
             return i18n_connection.close();
+        }
     });
 
     it("correct fields count in MetadataArgsStorage", () => {
