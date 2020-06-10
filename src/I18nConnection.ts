@@ -10,7 +10,7 @@ export class I18nConnection extends Connection {
     public constructor(options: I18nConnectionOptions) {
         super(options);
         Object.assign(this, {
-            ...options.oconnection // original connection
+            ...options.oconnection, // original connection
             // manager: this.createEntityManager()
         });
         this.manager = this.createEntityManager();

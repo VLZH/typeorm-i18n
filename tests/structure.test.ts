@@ -1,13 +1,13 @@
 import {
     Connection,
     getConnectionManager,
-    getMetadataArgsStorage
+    getMetadataArgsStorage,
 } from "typeorm";
 import {
     getI18nConnection,
     I18nConnection,
     I18nEntityManager,
-    I18nRepository
+    I18nRepository,
 } from "../src";
 import { Post } from "./entities/PostEntity";
 import { createTestingConnection, getTestDbOptions } from "./utils";
@@ -21,7 +21,7 @@ describe("structure on connection and entity manager", () => {
             type: "postgres",
             name: "default",
             ...getTestDbOptions(),
-            entities: [Post]
+            entities: [Post],
         });
         await connection.connect();
         i18n_connection = getI18nConnection();

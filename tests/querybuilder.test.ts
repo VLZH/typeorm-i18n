@@ -4,14 +4,14 @@ import {
     I18nConnection,
     I18nEntityManager,
     I18nRepository,
-    I18nSelectQueryBuilder
+    I18nSelectQueryBuilder,
 } from "../src";
 import { getLanguage, isTranslation, trimSuffx } from "../src/I18nQueryBuilder";
 import { Post } from "./entities/PostEntity";
 import {
     createFixtures,
     createTestingConnection,
-    getTestDbOptions
+    getTestDbOptions,
 } from "./utils";
 
 describe("test utils functions", () => {
@@ -46,7 +46,7 @@ describe("createQueryBuilder returns I18nQueryBuilder", () => {
         connection = createTestingConnection({
             type: "postgres",
             name: "d1",
-            entities: [Post]
+            entities: [Post],
         });
         i18n_connection = getI18nConnection("d1");
     });
@@ -85,7 +85,7 @@ describe("calling of I18nQueryBuilder.executeEntitiesAndRawResults", () => {
             type: "postgres",
             name: "d2",
             entities: [Post],
-            ...getTestDbOptions()
+            ...getTestDbOptions(),
         });
         await connection.connect();
         i18n_connection = getI18nConnection("d2");
@@ -142,10 +142,10 @@ describe("calling of I18nQueryBuilder.executeEntitiesAndRawResults", () => {
                 expect(post_fr.title).toEqual("Première poste");
             }
             if (posts_ru) {
-                expect(posts_ru.map(p => p.title)).toEqual([
+                expect(posts_ru.map((p) => p.title)).toEqual([
                     "Первый пост",
                     "Второй пост",
-                    "Третий пост"
+                    "Третий пост",
                 ]);
             }
         });

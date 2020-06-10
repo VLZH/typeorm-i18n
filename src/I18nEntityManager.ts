@@ -17,7 +17,7 @@ export class I18nEntityManager extends EntityManager {
         Object.assign(repo, {
             manager: _repo.manager,
             metadata: _repo.metadata,
-            queryRunner: _repo.queryRunner
+            queryRunner: _repo.queryRunner,
         });
         return repo;
     }

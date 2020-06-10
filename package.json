@@ -1,6 +1,6 @@
 {
     "name": "typeorm-i18n",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "repository": {
@@ -14,36 +14,39 @@
     "license": "MIT",
     "scripts": {
         "build": "tsc",
+        "public": "build & yarn publish",
         "start": "tsc --watch",
         "test": "jest",
         "lint": "eslint .",
+        "fix": "prettier --write .",
         "environment:start-db": "docker run --rm -p 5433:5432 -d --name=typeormi18n_test_database -e POSTGRES_PASSWORD=test -e POSTGRES_USER=test -e POSTGRES_DB=test  postgres:11",
         "environment:stop-db": "docker kill typeormi18n_test_database"
     },
     "dependencies": {
-        "typeorm": "^0.2.20"
+        "typeorm": "^0.2.25"
     },
     "devDependencies": {
-        "@types/jest": "^24.0.18",
+        "@types/jest": "^26.0.0",
         "@types/node": "^12.7.5",
-        "@typescript-eslint/eslint-plugin": "^2.3.0",
-        "@typescript-eslint/parser": "^2.3.0",
-        "eslint": "^6.4.0",
-        "eslint-config-prettier": "^6.3.0",
-        "eslint-plugin-prettier": "^3.1.1",
-        "husky": "^3.0.5",
-        "jest": "^24.9.0",
-        "pg": "^7.12.1",
+        "@typescript-eslint/eslint-plugin": "^3.2.0",
+        "@typescript-eslint/parser": "^3.2.0",
+        "eslint": "^7.2.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "husky": "^4.2.5",
+        "jest": "^26.0.1",
+        "pg": "^8.2.1",
+        "prettier": "^2.0.5",
         "reflect-metadata": "^0.1.13",
-        "ts-jest": "^24.1.0",
-        "typescript": "^3.6.3"
+        "ts-jest": "^26.1.0",
+        "typescript": "^3.9.5"
     },
     "prettier": {
         "tabWidth": 4
     },
     "husky": {
         "hooks": {
-            "pre-commit": "yarn test && yarn lint"
+            "pre-commit": "yarn fix && yarn lint & yarn test"
         }
     }
 }

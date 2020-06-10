@@ -7,7 +7,7 @@ import {
     DatabaseType,
     EntitySchema,
     getConnectionManager,
-    NamingStrategyInterface
+    NamingStrategyInterface,
 } from "typeorm";
 import { promisify } from "util";
 import { I18nConnection } from "../src";
@@ -57,7 +57,7 @@ export const createTestingConnection = (
     const connection = getConnectionManager().create(
         setupTestingConnections({
             enabledDrivers: [options.type],
-            ...options
+            ...options,
         })
     );
     return connection;
@@ -75,7 +75,7 @@ export function setupTestingConnections(
             options && options.dropSchema !== undefined
                 ? options.dropSchema
                 : false,
-        cache: options ? options.cache : undefined
+        cache: options ? options.cache : undefined,
     });
     return newOptions;
 }
@@ -92,7 +92,7 @@ export async function createFixtures(
     const fixtures = await loadFixture("Post");
     for (let fixture of fixtures) {
         const already_exist = await repo.count({
-            where: { id: fixture.id }
+            where: { id: fixture.id },
         });
         if (!already_exist) {
             await repo.save(fixture);
@@ -106,5 +106,5 @@ export const getTestDbOptions = () => ({
     port: 5433,
     database: "test",
     username: "test",
-    password: "test"
+    password: "test",
 });

@@ -7,7 +7,7 @@ export class Post {
     public id!: number;
     @I18nColumn({
         default_language: "en",
-        languages: ["en", "fr", "ru"]
+        languages: ["en", "fr", "ru"],
     })
     @Column()
     public title?: string;

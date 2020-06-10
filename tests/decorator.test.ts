@@ -11,7 +11,7 @@ describe("test decorator I18nColumn", () => {
         connection = createTestingConnection({
             type: "postgres",
             entities: [Post],
-            ...getTestDbOptions()
+            ...getTestDbOptions(),
         });
         connection.connect();
     });
@@ -29,7 +29,7 @@ describe("test decorator I18nColumn", () => {
     it("correct propertyNames", () => {
         expect(
             getMetadataArgsStorage().columns.map(
-                column_meta => column_meta.propertyName
+                (column_meta) => column_meta.propertyName
             )
         ).toEqual(["id", "title", "title__fr", "title__ru"]);
     });

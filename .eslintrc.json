@@ -5,6 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended",
         "plugin:@typescript-eslint/eslint-recommended"
     ],
     "globals": {
@@ -16,7 +18,7 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": ["@typescript-eslint"],
+    "plugins": ["@typescript-eslint", "prettier"],
     "rules": {
         "indent": ["error", 4],
         "linebreak-style": ["error", "unix"],

@@ -6,30 +6,30 @@ const getPropertyNameForTranslation = (propertyName: string, lang: string) =>
     `${propertyName}${SUFFIX_DELIMITER}${lang}`;
 
 export function I18nColumn(options: I18nColumnOptions) {
-    return function(object: Object, propertyName: string) {
+    return function (object: Object, propertyName: string) {
         const original = getMetadataArgsStorage().columns.find(
-            column =>
+            (column) =>
                 column.target === object.constructor &&
                 column.propertyName === propertyName
         );
         // original_uniq
         // original_generated
         const filtered_languages = options.languages.filter(
-            l => l !== options.default_language
+            (l) => l !== options.default_language
         );
 
         if (original) {
-            for (let lang of filtered_languages) {
+            for (const lang of filtered_languages) {
                 getMetadataArgsStorage().columns.push({
                     ...original,
                     options: {
                         ...original.options,
-                        nullable: true
+                        nullable: true,
                     },
                     propertyName: getPropertyNameForTranslation(
                         original.propertyName,
                         lang
-                    )
+                    ),
                 });
             }
         } else {

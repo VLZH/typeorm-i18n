@@ -1,7 +1,7 @@
 import {
     getConnection as _getConnection,
     createConnection as _createConnection,
-    ConnectionOptions
+    ConnectionOptions,
 } from "typeorm";
 import { I18nConnection } from "./I18nConnection";
 import { I18nColumn } from "./decorators";
@@ -17,7 +17,7 @@ export const getI18nConnection = (connectionName?: string): I18nConnection => {
     const _conn = _getConnection(connectionName);
     const conn = new I18nConnection({
         ..._conn.options,
-        oconnection: _conn
+        oconnection: _conn,
     });
     return conn;
 };
@@ -33,7 +33,7 @@ export const createI18nConnection = async (
         : await _createConnection();
     const conn = new I18nConnection({
         ..._conn.options,
-        oconnection: _conn
+        oconnection: _conn,
     });
     return conn;
 };
@@ -43,5 +43,5 @@ export {
     I18nEntityManager,
     I18nColumn,
     I18nSelectQueryBuilder,
-    I18nRepository
+    I18nRepository,
 };
