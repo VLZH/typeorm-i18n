@@ -28,7 +28,7 @@ export class I18nConnection extends Connection {
         const repo = this.manager.getRepository(target);
         return repo;
     }
-    createEntityManager(queryRunner?: QueryRunner): I18nEntityManager {
+    public createEntityManager(queryRunner?: QueryRunner): I18nEntityManager {
         return new I18nEntityManager(this, queryRunner);
     }
 }

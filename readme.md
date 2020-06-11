@@ -5,6 +5,7 @@ Translation tool for your typeorm models.
 > This package does not ready for production, but you can help me to do this! Let`s fork!
 
 -   [Installation](#Installation)
+-   [API](#API)
 -   [Usage](#Usage)
     -   [Simple](#Simple)
     -   [With nestjs](#With_nestjs)
@@ -26,7 +27,81 @@ with npm:
 npm install typeorm-i18n
 ```
 
-# Usage
+# API
+
+### `I18nColumn`
+
+-   `I18nColumn(options: I18nColumnOptions)`
+
+    Decorator for mark column as translatable.
+
+-   `I18nColumnOptions`
+
+    Interface of configuration for `I18nColumn`.
+
+    -   `languages` - list of languages for that column. Example: `['es', 'cn', 'en']`
+    -   `default_language` - default language ???
+
+Entity configuration example:
+
+```typescript
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { I18nColumn } from "typeorm-i18n";
+
+@Entity()
+export class Photo {
+    @PrimaryGeneratedColumn() id!: number;
+    @I18nColumn({
+        languages: ["es", "cn", "en"],
+        default_language: "en",
+    })
+    @Column({ length: 500 })
+    name: string;
+
+    @Column() filename!: string;
+}
+```
+
+### `I18nConnection`
+
+`I18nConnection` is wrapper around regular typeorm's connection with overwritten methods and special EntityManager(`I18nEntityManager`).
+
+Overwritten methdos in `I18nConnection`:
+
+-   `createQueryBuilder` - methods like original method in `typeorm.Conneciton`, but this methods returns `I18nSelectQueryBuilder<Entity>`.
+-   `getRepository` - methods like original method in `typeorm.Conneciton`, but this methods returns `I18nRepository<Entity>`.
+
+For getting `I18nConnection` you can to use this functions:
+
+-   `getI18nConnection(connectionName?: string): I18nConnection`
+
+    It is function for getting access to wrapper around already exist regular connection _(typeorm's `Connection`)_. This function returns `I18nConnection` instance.
+
+-   `createI18nConnection(options?: ConnectionOptions): Promise<I18nConnection>`
+
+    It is funciton that create regular connection and returns wrapper around regular connection.
+
+### `I18nRepository`
+
+It is like original `Repository` from typeorm, but this class has additional methods:
+
+-   `locale(language: string): I18nRepository<Entity>` - configure locale for setting to fields.
+
+    ```typescript
+    const photo_repository = i18n_connection.getRepository(Photo);
+    photo_repository.locale("es");
+    const photo_es = photo_repository.findOne();
+    console.log(photo_es.name); // 'hom'
+    photo_repository.locale("ru"); // change locale
+    const photo_ru = photo_repository.findOne();
+    console.log(photo_ru.name); // 'дом'
+    ```
+
+### `I18nSelectQueryBuilder`
+
+`I18nSelectQueryBuilder` it is special class that overwrite `SelectQueryBuilder` from typeorm. This class provide additional method `locale`.
+
+# Usage exmaples
 
 ## Simple
 
