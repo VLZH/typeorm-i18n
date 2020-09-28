@@ -1,6 +1,6 @@
 {
     "name": "typeorm-i18n",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "repository": {
@@ -23,7 +23,7 @@
         "environment:stop-db": "docker kill typeormi18n_test_database"
     },
     "dependencies": {
-        "typeorm": "^0.2.25"
+        "typeorm": "^0.2.26"
     },
     "devDependencies": {
         "@types/jest": "^26.0.0",

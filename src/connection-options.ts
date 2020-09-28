@@ -13,6 +13,7 @@ import { ExpoConnectionOptions } from "typeorm/driver/expo/ExpoConnectionOptions
 import { AuroraDataApiConnectionOptions } from "typeorm/driver/aurora-data-api/AuroraDataApiConnectionOptions";
 import { AuroraDataApiPostgresConnectionOptions } from "typeorm/driver/aurora-data-api-pg/AuroraDataApiPostgresConnectionOptions";
 import { SapConnectionOptions } from "typeorm/driver/sap/SapConnectionOptions";
+import { BetterSqlite3ConnectionOptions } from "typeorm/driver/better-sqlite3/BetterSqlite3ConnectionOptions";
 import { Connection } from "typeorm";
 
 interface I18nMysqlConnectionOptions extends MysqlConnectionOptions {
@@ -79,6 +80,11 @@ interface I18nExpoConnectionOptions extends ExpoConnectionOptions {
     oconnection: Connection;
 }
 
+interface I18nBetterSqlite3ConnectionOptions
+    extends BetterSqlite3ConnectionOptions {
+    oconnection: Connection;
+}
+
 export type I18nConnectionOptions =
     | I18nMysqlConnectionOptions
     | I18nPostgresConnectionOptions
@@ -94,4 +100,5 @@ export type I18nConnectionOptions =
     | I18nMongoConnectionOptions
     | I18nAuroraDataApiConnectionOptions
     | I18nAuroraDataApiPostgresConnectionOptions
-    | I18nExpoConnectionOptions;
+    | I18nExpoConnectionOptions
+    | I18nBetterSqlite3ConnectionOptions;
