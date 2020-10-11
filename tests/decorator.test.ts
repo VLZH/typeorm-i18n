@@ -1,6 +1,7 @@
 import { Connection, getMetadataArgsStorage } from "typeorm";
 import { I18nConnection } from "../src";
-import { Post } from "./entities/PostEntity";
+import { AuthorEntity } from "./entities/AuthorEntity";
+import { PostEntity } from "./entities/PostEntity";
 import { createTestingConnection, getTestDbOptions } from "./utils";
 
 describe("test decorator I18nColumn", () => {
@@ -10,7 +11,7 @@ describe("test decorator I18nColumn", () => {
     beforeEach(() => {
         connection = createTestingConnection({
             type: "postgres",
-            entities: [Post],
+            entities: [PostEntity, AuthorEntity],
             ...getTestDbOptions(),
         });
         connection.connect();
@@ -23,14 +24,26 @@ describe("test decorator I18nColumn", () => {
     });
 
     it("correct fields count in MetadataArgsStorage", () => {
-        expect(getMetadataArgsStorage().columns).toHaveLength(4);
+        expect(getMetadataArgsStorage().columns).toHaveLength(8);
     });
 
     it("correct propertyNames", () => {
         expect(
-            getMetadataArgsStorage().columns.map(
-                (column_meta) => column_meta.propertyName
-            )
-        ).toEqual(["id", "title", "title__fr", "title__ru"]);
+            getMetadataArgsStorage().columns.reduce((acc, column_meta) => {
+                const targetName =
+                    typeof column_meta.target === "string"
+                        ? column_meta.target
+                        : column_meta.target.name;
+                if (!(targetName in acc)) {
+                    acc[targetName] = [];
+                }
+                const c = acc[targetName] as string[];
+                c.push(column_meta.propertyName);
+                return acc;
+            }, {} as { [key: string]: string[] })
+        ).toEqual({
+            PostEntity: ["id", "title", "title__fr", "title__ru"],
+            AuthorEntity: ["id", "full_name", "full_name__fr", "full_name__ru"],
+        });
     });
 });

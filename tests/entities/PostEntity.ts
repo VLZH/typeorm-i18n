@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { I18nColumn } from "../../src";
+import { AuthorEntity } from "./AuthorEntity";
 
 @Entity()
-export class Post {
+export class PostEntity {
     @PrimaryGeneratedColumn()
     public id!: number;
     @I18nColumn({
@@ -11,4 +12,9 @@ export class Post {
     })
     @Column()
     public title?: string;
+
+    @ManyToOne(() => AuthorEntity, {
+        nullable: true,
+    })
+    author?: AuthorEntity;
 }

@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { I18nColumn } from "../../src";
+import { PostEntity } from "./PostEntity";
 
 @Entity()
-export class Author {
+export class AuthorEntity {
     @PrimaryGeneratedColumn()
     public id!: number;
     @I18nColumn({
@@ -11,4 +12,7 @@ export class Author {
     })
     @Column()
     public full_name!: string;
+
+    @OneToMany(() => PostEntity, (post) => post.author)
+    posts!: PostEntity[];
 }

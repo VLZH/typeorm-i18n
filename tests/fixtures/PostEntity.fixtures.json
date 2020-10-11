@@ -3,18 +3,21 @@
         "id": 1,
         "title": "First post",
         "title__fr": "Première poste",
-        "title__ru": "Первый пост"
+        "title__ru": "Первый пост",
+        "authorId": 1
     },
     {
         "id": 2,
         "title": "Second post",
         "title__fr": "Deuxième poste",
-        "title__ru": "Второй пост"
+        "title__ru": "Второй пост",
+        "authorId": 1
     },
     {
         "id": 3,
         "title": "Third post",
         "title__fr": "Troisième poste",
-        "title__ru": "Третий пост"
+        "title__ru": "Третий пост",
+        "authorId": 2
     }
 ]

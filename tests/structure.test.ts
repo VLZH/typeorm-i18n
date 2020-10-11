@@ -9,7 +9,8 @@ import {
     I18nEntityManager,
     I18nRepository,
 } from "../src";
-import { Post } from "./entities/PostEntity";
+import { AuthorEntity } from "./entities/AuthorEntity";
+import { PostEntity } from "./entities/PostEntity";
 import { createTestingConnection, getTestDbOptions } from "./utils";
 
 describe("structure on connection and entity manager", () => {
@@ -21,7 +22,7 @@ describe("structure on connection and entity manager", () => {
             type: "postgres",
             name: "default",
             ...getTestDbOptions(),
-            entities: [Post],
+            entities: [PostEntity, AuthorEntity],
         });
         await connection.connect();
         i18n_connection = getI18nConnection();
@@ -32,10 +33,15 @@ describe("structure on connection and entity manager", () => {
     });
 
     it("getMetadataArgsStorage.tables is not empty", () => {
-        expect(getMetadataArgsStorage().tables).toHaveLength(1);
+        expect(getMetadataArgsStorage().tables).toHaveLength(2);
     });
-    it("getMetadata", () => {
-        expect(i18n_connection.getMetadata(Post));
+
+    it("getMetadata for PostEntity", () => {
+        expect(i18n_connection.getMetadata(PostEntity));
+    });
+
+    it("getMetadata for AuthorEntity", () => {
+        expect(i18n_connection.getMetadata(AuthorEntity));
     });
 
     it("connection is I18nConnection", () => {
@@ -66,14 +72,14 @@ describe("structure on connection and entity manager", () => {
         );
     });
     it("connection.getRepository returns I18nRepository", () => {
-        expect(i18n_connection.getRepository(Post)).toBeInstanceOf(
+        expect(i18n_connection.getRepository(PostEntity)).toBeInstanceOf(
             I18nRepository
         );
     });
     it("entity_manager.getRepository returns I18nRepository", () => {
-        expect(i18n_connection.manager.getRepository(Post)).toBeInstanceOf(
-            I18nRepository
-        );
+        expect(
+            i18n_connection.manager.getRepository(PostEntity)
+        ).toBeInstanceOf(I18nRepository);
     });
     it("connections count is 1", () => {
         expect(getConnectionManager().connections).toHaveLength(1);

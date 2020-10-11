@@ -11,11 +11,12 @@ import {
 } from "typeorm";
 import { promisify } from "util";
 import { I18nConnection } from "../src";
-import { Post } from "./entities/PostEntity";
+import { AuthorEntity } from "./entities/AuthorEntity";
+import { PostEntity } from "./entities/PostEntity";
 
 const asyncReadFile = promisify(readFile);
 
-async function loadFixture(entity_name: "Post") {
+async function loadFixture(entity_name: "PostEntity" | "AuthorEntity") {
     const bf = await asyncReadFile(
         join(__dirname, `./fixtures/${entity_name}.fixtures.json`)
     );
@@ -81,15 +82,36 @@ export function setupTestingConnections(
 }
 
 /**
- * Create fixtures in db
+ * Create posts in db
  * @returns {Promise<boolean>} successfully
  */
-export async function createFixtures(
+export async function createPostsFixtures(
     connection: I18nConnection
 ): Promise<boolean> {
-    const repo = connection.manager.getRepository(Post);
+    const repo = connection.manager.getRepository(PostEntity);
     await connection.synchronize();
-    const fixtures = await loadFixture("Post");
+    const fixtures = await loadFixture("PostEntity");
+    for (let fixture of fixtures) {
+        const already_exist = await repo.count({
+            where: { id: fixture.id },
+        });
+        if (!already_exist) {
+            await repo.save(fixture);
+        }
+    }
+    return true;
+}
+
+/**
+ * Create authors in db
+ * @returns {Promise<boolean>} successfully
+ */
+export async function createAuthorsFixtures(
+    connection: I18nConnection
+): Promise<boolean> {
+    const repo = connection.manager.getRepository(AuthorEntity);
+    await connection.synchronize();
+    const fixtures = await loadFixture("AuthorEntity");
     for (let fixture of fixtures) {
         const already_exist = await repo.count({
             where: { id: fixture.id },

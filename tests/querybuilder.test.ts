@@ -7,9 +7,10 @@ import {
     I18nSelectQueryBuilder,
 } from "../src";
 import { getLanguage, isTranslation, trimSuffx } from "../src/I18nQueryBuilder";
-import { Post } from "./entities/PostEntity";
+import { AuthorEntity } from "./entities/AuthorEntity";
+import { PostEntity } from "./entities/PostEntity";
 import {
-    createFixtures,
+    createPostsFixtures,
     createTestingConnection,
     getTestDbOptions,
 } from "./utils";
@@ -46,7 +47,7 @@ describe("createQueryBuilder returns I18nQueryBuilder", () => {
         connection = createTestingConnection({
             type: "postgres",
             name: "d1",
-            entities: [Post],
+            entities: [PostEntity],
         });
         i18n_connection = getI18nConnection("d1");
     });
@@ -84,12 +85,12 @@ describe("calling of I18nQueryBuilder.executeEntitiesAndRawResults", () => {
         connection = createTestingConnection({
             type: "postgres",
             name: "d2",
-            entities: [Post],
+            entities: [PostEntity, AuthorEntity],
             ...getTestDbOptions(),
         });
         await connection.connect();
         i18n_connection = getI18nConnection("d2");
-        await createFixtures(i18n_connection);
+        await createPostsFixtures(i18n_connection);
         mockedExecuteEntitiesAndRawResults = jest
             .fn()
             .mockImplementation(
@@ -104,13 +105,17 @@ describe("calling of I18nQueryBuilder.executeEntitiesAndRawResults", () => {
     });
 
     it("I18nQueryBuilder.executeEntitiesAndRawResults called on findOne", async () => {
-        const repo: I18nRepository<Post> = i18n_connection.getRepository(Post);
+        const repo: I18nRepository<PostEntity> = i18n_connection.getRepository(
+            PostEntity
+        );
         await repo.findOne();
         expect(mockedExecuteEntitiesAndRawResults.mock.calls).toHaveLength(1);
     });
 
     it("I18nQueryBuilder.executeEntitiesAndRawResults called on find", async () => {
-        const repo: I18nRepository<Post> = i18n_connection.getRepository(Post);
+        const repo: I18nRepository<PostEntity> = i18n_connection.getRepository(
+            PostEntity
+        );
         await repo.find();
         expect(mockedExecuteEntitiesAndRawResults.mock.calls).toHaveLength(1);
     });
@@ -125,7 +130,7 @@ describe("calling of I18nQueryBuilder.executeEntitiesAndRawResults", () => {
         });
 
         const checkDefaultLocale = async () => {
-            const post = await manager.findOne(Post, 1);
+            const post = await manager.findOne(PostEntity, 1);
             if (post) {
                 expect(post.title).toEqual("First post");
             }
@@ -136,8 +141,8 @@ describe("calling of I18nQueryBuilder.executeEntitiesAndRawResults", () => {
         });
 
         it("setup translated values", async () => {
-            const post_fr = await manager.locale("fr").findOne(Post, 1);
-            const posts_ru = await manager.locale("ru").find(Post);
+            const post_fr = await manager.locale("fr").findOne(PostEntity, 1);
+            const posts_ru = await manager.locale("ru").find(PostEntity);
             if (post_fr) {
                 expect(post_fr.title).toEqual("Première poste");
             }
