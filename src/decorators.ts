@@ -7,19 +7,19 @@ const getPropertyNameForTranslation = (propertyName: string, lang: string) =>
 
 export function I18nColumn(options: I18nColumnOptions) {
     return function (object: Object, propertyName: string) {
+        // find original column in storage
         const original = getMetadataArgsStorage().columns.find(
             (column) =>
                 column.target === object.constructor &&
                 column.propertyName === propertyName
         );
-        // original_uniq
-        // original_generated
-        const filtered_languages = options.languages.filter(
+
+        const additional_languages = options.languages.filter(
             (l) => l !== options.default_language
         );
 
         if (original) {
-            for (const lang of filtered_languages) {
+            for (const lang of additional_languages) {
                 getMetadataArgsStorage().columns.push({
                     ...original,
                     options: {
@@ -33,7 +33,9 @@ export function I18nColumn(options: I18nColumnOptions) {
                 });
             }
         } else {
-            console.error("Original not found");
+            console.error(
+                `Original column for ${object.constructor}:${propertyName} not found in metadata storage.`
+            );
         }
     };
 }

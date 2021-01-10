@@ -50,11 +50,14 @@ const isTranslationFor = (
     return false;
 };
 
+/**
+ * Find associated translations
+ */
 const getTranslations = (
     column: ColumnMetadata,
     columns: ColumnMetadata[],
-    raw: any,
-    alias: Alias
+    entity: any,
+    _alias: Alias
 ) => {
     const result: {
         [key: string]: string;
@@ -63,7 +66,7 @@ const getTranslations = (
         if (isTranslationFor(column, variant)) {
             const lang = getLanguage(variant.propertyName);
             if (lang) {
-                result[lang] = raw[`${alias.name}_${variant.propertyPath}`];
+                result[lang] = entity[`${variant.propertyPath}`];
             }
         }
     }
@@ -86,7 +89,7 @@ export class I18nSelectQueryBuilder<T> extends SelectQueryBuilder<T> {
                     const translations = getTranslations(
                         column,
                         entity_metadata.columns,
-                        raw[idx],
+                        entities[idx],
                         main_alias
                     );
                     if (this._locale && translations[this._locale]) {

@@ -67,7 +67,7 @@ export const createTestingConnection = (
 export function setupTestingConnections(
     options?: TestingOptions
 ): ConnectionOptions {
-    let newOptions: any = Object.assign({}, options as ConnectionOptions, {
+    const newOptions: any = Object.assign({}, options as ConnectionOptions, {
         name: options && options.name ? options.name : "default",
         entities: options && options.entities ? options.entities : [],
         migrations: options && options.migrations ? options.migrations : [],
@@ -91,7 +91,7 @@ export async function createPostsFixtures(
     const repo = connection.manager.getRepository(PostEntity);
     await connection.synchronize();
     const fixtures = await loadFixture("PostEntity");
-    for (let fixture of fixtures) {
+    for (const fixture of fixtures) {
         const already_exist = await repo.count({
             where: { id: fixture.id },
         });
@@ -112,7 +112,7 @@ export async function createAuthorsFixtures(
     const repo = connection.manager.getRepository(AuthorEntity);
     await connection.synchronize();
     const fixtures = await loadFixture("AuthorEntity");
-    for (let fixture of fixtures) {
+    for (const fixture of fixtures) {
         const already_exist = await repo.count({
             where: { id: fixture.id },
         });
