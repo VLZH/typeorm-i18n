@@ -1,6 +1,6 @@
 {
     "name": "typeorm-i18n",
-    "version": "0.1.0",
+    "version": "0.2.0-rc.1",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "repository": {
@@ -23,7 +23,7 @@
         "environment:stop-db": "docker kill typeormi18n_test_database"
     },
     "dependencies": {
-        "typeorm": "^0.2.26"
+        "typeorm": "^0.2.31"
     },
     "devDependencies": {
         "@types/jest": "^26.0.0",
@@ -39,6 +39,7 @@
         "prettier": "^2.0.5",
         "reflect-metadata": "^0.1.13",
         "ts-jest": "^26.1.0",
+        "tslib": "^2.1.0",
         "typescript": "^3.9.5"
     },
     "prettier": {
