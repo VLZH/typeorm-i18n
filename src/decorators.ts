@@ -25,6 +25,10 @@ export function I18nColumn(options: I18nColumnOptions) {
                     options: {
                         ...original.options,
                         nullable: true,
+                        name: original.options.name ? getPropertyNameForTranslation(
+                            original.options.name,
+                            lang
+                        ) : undefined
                     },
                     propertyName: getPropertyNameForTranslation(
                         original.propertyName,
