@@ -20,7 +20,8 @@
         "lint": "eslint .",
         "fix": "prettier --write .",
         "environment:start-db": "docker run --rm -p 5433:5432 -d --name=typeormi18n_test_database -e POSTGRES_PASSWORD=test -e POSTGRES_USER=test -e POSTGRES_DB=test  postgres:11",
-        "environment:stop-db": "docker kill typeormi18n_test_database"
+        "environment:stop-db": "docker kill typeormi18n_test_database",
+        "prepare": "build"
     },
     "dependencies": {
         "typeorm": "^0.2.31"
